@@ -12,6 +12,11 @@ const TodosForm = () => {
     setTodos([...todos, todo]);
     setTodo("")
   };
+
+  const deleteTodo = (todoPos) => {
+    let todosCopy = todos.filter((todo, pos) => pos !== todoPos)
+    setTodos(todosCopy)
+  }
   return (
     <>
       <Form onSubmit={handleSubmit}>
@@ -27,7 +32,7 @@ const TodosForm = () => {
           </Button>
         </Form.Group>
       </Form>
-      <TodosList />
+      <TodosList todos={todos} deleteTodo={deleteTodo} />
     </>
   );
 };

@@ -1,10 +1,13 @@
+/* eslint-disable react/prop-types */
 import { ListGroup, Button } from "react-bootstrap";
 
-const TodosListItem = () => {
+const TodosListItem = ({ todo, deleteTodo, pos }) => {
   return (
     <ListGroup.Item className="d-flex justify-content-between">
-      Go to the groceries store
-      <Button variant="danger">Delete</Button>
+      {todo}
+      <Button variant="danger" onClick={() => deleteTodo(pos)}>
+        Delete
+      </Button>
     </ListGroup.Item>
   );
 };

@@ -1,22 +1,28 @@
 /* eslint-disable no-unused-vars */
 import { Form, Button } from "react-bootstrap";
 import TodosList from "./TodosList";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const TodosForm = () => {
+  const todosAlreadyInLocalStorage =
+    JSON.parse(localStorage.getItem("todosList")) || [];
   const [todo, setTodo] = useState("");
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(todosAlreadyInLocalStorage);
+
+  useEffect(() => {
+    localStorage.setItem("todosList", JSON.stringify(todos));
+  }, [todos]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setTodos([...todos, todo]);
-    setTodo("")
+    setTodo("");
   };
 
   const deleteTodo = (todoPos) => {
-    let todosCopy = todos.filter((todo, pos) => pos !== todoPos)
-    setTodos(todosCopy)
-  }
+    let todosCopy = todos.filter((todo, pos) => pos !== todoPos);
+    setTodos(todosCopy);
+  };
   return (
     <>
       <Form onSubmit={handleSubmit}>
